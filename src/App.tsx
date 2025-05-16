@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import NavBar from '@/components/navbar';
 import Header from '@/components/header';
 import Transactions from '@/components/transactions';
@@ -9,7 +8,7 @@ function App() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
-    <div className='flex'>
+    <div className='flex bg-[#FAFAFA]'>
       <NavBar isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
       <div className='flex-1'>
         <Header setIsNavOpen={setIsNavOpen} />

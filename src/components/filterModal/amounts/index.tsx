@@ -54,18 +54,15 @@ const Amounts: FC<AmountsProps> = ({ amountRange, setAmountRange }) => {
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     if (open) {
-      setMinValue(amountRange.min ?? DEFAULT_MIN);
-      setMaxValue(amountRange.max ?? DEFAULT_ACTIVE_MAX);
+      const min = Math.min(amountRange.min ?? DEFAULT_MIN, DEFAULT_MAX);
+      const max = Math.min(amountRange.max ?? DEFAULT_ACTIVE_MAX, DEFAULT_MAX);
+      setMinValue(min);
+      setMaxValue(max);
     }
   }, [amountRange, open]);
 
-  useEffect(() => {
-    if (open) {
-      setAmountRange({ min: minValue, max: maxValue });
-    }
-  }, [minValue, maxValue]);
 
   return (
     <div className='mb-9'>

@@ -45,8 +45,9 @@ export default function Transactions() {
   const transactions = useTransactionStore((state) => state.transactions);
   const filters = useTransactionStore((state) => state.filters);
   const timeRange = useTransactionStore((state) => state.timeRange);
-
   const setTotalAmount = useTransactionStore((state) => state.setTotalAmount);
+
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
   const shownTransactions = useMemo(
     () =>
@@ -83,8 +84,6 @@ export default function Transactions() {
     setTotalAmount(amount);
   }, [shownTransactions]);
   const { loading, error, fetchTransactions } = useTransactionStore();
-
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
   useEffect(() => {
     fetchTransactions();

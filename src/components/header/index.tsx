@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ setIsNavOpen }) => {
         <img src={logo} alt='uala logo' className='h-6 z-10' />
       </div>
 
-      <div className='hidden md:flex items-center bg-white px-8 py-4 shadow-sm border-b border-[#dfe3f0]'>
+      <div className='hidden md:flex items-center bg-white px-8 py-4'>
         <img
           src={photo}
           alt='user'

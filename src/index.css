@@ -4,7 +4,7 @@
 
 @layer utilities {
   .nav-shadow-right {
-  box-shadow: 10px 0 10px -4px rgba(114, 144, 207, 0.248);
+  box-shadow: 10px 0 10px -5px rgba(13, 66, 182, 0.18);
   }
 }
 
