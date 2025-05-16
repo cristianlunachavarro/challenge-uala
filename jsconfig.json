@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "baseUrl": "./src",
+    "paths": {
+      "@/app": ["./App.tsx"],
+      "@/components/*": ["./components/*"],
+      "@/pages/*": ["./pages/*"],
+      "@/assets/*": ["./assets/*"],
+      "@/types/*": ["./types/*"]
+    },
+  },
+}
