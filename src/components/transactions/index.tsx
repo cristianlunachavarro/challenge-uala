@@ -7,11 +7,10 @@ import export_icon from '@/assets/transaction/download-icon.png';
 
 import { Filters, Transaction } from '@/types/transactions';
 import { useTransactionStore } from '@/store/useTransactionStore';
-import { downloadFile } from '@/utils/downloadFile';
 
 import FilterModal from '@/components/filterModal';
-import TransactionsListSkeleton from '@/components/transactions/transactionsListSkeleton';
 import TransactionsList from '@/components/transactions/transactionList';
+import ExportModal from '@/components/exportModal';
 
 dayjs.extend(weekOfYear);
 
@@ -42,12 +41,14 @@ const filterTxs = (tx: Transaction, filters: Filters) => {
 };
 
 export default function Transactions() {
+  const { error, fetchTransactions } = useTransactionStore();
   const transactions = useTransactionStore((state) => state.transactions);
   const filters = useTransactionStore((state) => state.filters);
   const timeRange = useTransactionStore((state) => state.timeRange);
   const setTotalAmount = useTransactionStore((state) => state.setTotalAmount);
 
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const [isOpenExport, setOpenExport] = useState<boolean>(false);
 
   const shownTransactions = useMemo(
     () =>
@@ -83,23 +84,18 @@ export default function Transactions() {
     );
     setTotalAmount(amount);
   }, [shownTransactions]);
-  const { loading, error, fetchTransactions } = useTransactionStore();
 
   useEffect(() => {
     fetchTransactions();
   }, []);
 
-  const handleDownload = () => {
-    downloadFile(shownTransactions);
-  };
-
   if (error) return <p>{error}</p>;
 
   return (
-    <div className='flex flex-col max-w-lg m-auto p p-9'>
+    <div className='flex flex-col max-w-lg m-auto p p-9 relative'>
       <div className='flex justify-between mb-5'>
         <h2 className='text-sm font-semibold'>Historial de transacciones</h2>
-        <div className='flex'>
+        <div className='flex items-center space-x-4'>
           <img
             onClick={() => setOpenModal(true)}
             className='w-[24px] h-[24px] cursor-pointer'
@@ -107,18 +103,17 @@ export default function Transactions() {
             alt='filter-icon'
           />
           <img
-            onClick={handleDownload}
-            className='w-[24px] h-[24px] ml-4 cursor-pointer'
+            onClick={() => setOpenExport(!isOpenExport)}
+            className='w-[24px] h-[24px] cursor-pointer'
             src={export_icon}
             alt='export-icon'
           />
         </div>
       </div>
-      {loading ? (
-        <TransactionsListSkeleton />
-      ) : (
-        <TransactionsList transactions={shownTransactions} />
+      {isOpenExport && (
+        <ExportModal setOpenExport={() => setOpenExport(false)} />
       )}
+      <TransactionsList transactions={shownTransactions} />
       {isOpenModal && <FilterModal setOpenModal={setOpenModal} />}
     </div>
   );

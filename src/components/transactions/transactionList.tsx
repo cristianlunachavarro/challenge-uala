@@ -5,12 +5,19 @@ import category_stores from '@/assets/transaction/category-stores-in.png';
 import empty_search from '@/assets/transaction/empty-search.png';
 
 import { Transaction } from '@/types/transactions';
+import { useTransactionStore } from '@/store/useTransactionStore';
+
+import TransactionsListSkeleton from '@/components/transactions/transactionsListSkeleton';
 
 interface TransactionsListProps {
   transactions: Transaction[];
 }
 
 const TransactionsList: FC<TransactionsListProps> = ({ transactions }) => {
+  const { loading } = useTransactionStore();
+
+  if (loading) return <TransactionsListSkeleton />;
+
   if (!transactions.length) {
     return (
       <div className='flex flex-col justify-center items-center m-9'>
@@ -27,7 +34,7 @@ const TransactionsList: FC<TransactionsListProps> = ({ transactions }) => {
   }
 
   return (
-    <div className='overflow-y-auto max-h-[350px] pr-2'>
+    <div className='overflow-y-auto max-h-[450px] pr-2'>
       <ul className='space-y-4'>
         {transactions.map((tx: Transaction) => (
           <li key={tx.id} className='border-b py-3'>

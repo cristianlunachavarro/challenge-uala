@@ -84,18 +84,10 @@ const FilterModal: React.FC<FilterProps> = ({ setOpenModal }) => {
     const hasInstallment = selectedInstallment !== null;
     const hasPayments = selectedPayments.length > 0;
     const hasDateRange = dateRange.from && dateRange.to;
-    const hasAmountRange = 
+    const hasAmountRange =
       amountRange.min !== undefined &&
       amountRange.max !== undefined &&
       amountRange.max > 0;
-
-    console.log({
-      hasCards,
-      hasInstallment,
-      hasPayments,
-      hasDateRange,
-      hasAmountRange,
-    });
 
     return (
       hasCards ||
@@ -138,7 +130,6 @@ const FilterModal: React.FC<FilterProps> = ({ setOpenModal }) => {
   ]);
 
   useEffect(() => {
-    console.log('pasda aca')
     if (validateInputs()) {
       setSubmitDisabled(false);
     } else {
@@ -151,10 +142,8 @@ const FilterModal: React.FC<FilterProps> = ({ setOpenModal }) => {
     selectedPayments,
     dateRange,
     clearFilters,
-    setAmountRange
+    setAmountRange,
   ]);
-
-  console.log({ amountRange });
 
   return (
     <div className='fixed inset-0 z-[90] bg-black bg-opacity-30 backdrop-blur-sm'>

@@ -57,6 +57,7 @@ const Dates: FC<DatesProps> = ({ dateRange, setDateRange }) => {
             mode='range'
             selected={range}
             onSelect={handleSelect}
+            navLayout='around'
             classNames={{
               day_selected: 'bg-blue-800 text-white',
               day_range_middle: 'bg-blue-100',
