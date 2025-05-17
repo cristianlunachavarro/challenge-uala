@@ -52,7 +52,7 @@ const Dates: FC<DatesProps> = ({ dateRange, setDateRange }) => {
       </div>
 
       {open && (
-        <div className='mt-5 p-4 rounded-xl shadow bg-white w-fit'>
+        <div className='mt-5 p-4 rounded-xl shadow bg-white w-fit m-auto'>
           <DayPicker
             mode='range'
             selected={range}

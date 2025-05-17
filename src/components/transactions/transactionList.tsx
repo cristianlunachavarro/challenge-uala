@@ -51,9 +51,7 @@ const TransactionsList: FC<TransactionsListProps> = ({ transactions }) => {
                 </div>
               </div>
               <div className='flex flex-col items-end text-right'>
-                <p className='text-sm text-green-700 font-semibold'>
-                  +${tx.amount.toLocaleString()}
-                </p>
+                <p className='text-sm text-green-700 font-semibold'>{`+$${tx.amount.toLocaleString()}`}</p>
                 <p className='text-sm text-gray-400'>
                   {dayjs(tx.createdAt).format('DD/MM/YYYY')}
                 </p>

@@ -41,7 +41,7 @@ const filterTxs = (tx: Transaction, filters: Filters) => {
 };
 
 export default function Transactions() {
-  const { error, fetchTransactions } = useTransactionStore();
+  const { fetchTransactions } = useTransactionStore();
   const transactions = useTransactionStore((state) => state.transactions);
   const filters = useTransactionStore((state) => state.filters);
   const timeRange = useTransactionStore((state) => state.timeRange);
@@ -89,8 +89,6 @@ export default function Transactions() {
     fetchTransactions();
   }, []);
 
-  if (error) return <p>{error}</p>;
-
   return (
     <div className='flex flex-col max-w-lg m-auto p p-9 relative'>
       <div className='flex justify-between mb-5'>
@@ -110,10 +108,8 @@ export default function Transactions() {
           />
         </div>
       </div>
-      {isOpenExport && (
-        <ExportModal setOpenExport={() => setOpenExport(false)} />
-      )}
       <TransactionsList transactions={shownTransactions} />
+      {isOpenExport && <ExportModal setOpenExport={() => setOpenExport(false)} />}
       {isOpenModal && <FilterModal setOpenModal={setOpenModal} />}
     </div>
   );

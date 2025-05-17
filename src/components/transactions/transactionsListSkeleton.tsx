@@ -1,6 +1,9 @@
 const TransactionsListSkeleton = () => {
   return (
-    <div className='overflow-y-auto max-h-[350px] pr-2 animate-pulse bg-[#FAFAFA]'>
+    <div
+      data-testid='transactions-list-skeleton'
+      className='overflow-y-auto max-h-[350px] pr-2 animate-pulse bg-[#FAFAFA]'
+    >
       <ul className='space-y-4'>
         {Array.from({ length: 5 }).map((_, idx) => (
           <li key={idx} className='border-b py-3'>

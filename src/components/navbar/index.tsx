@@ -58,7 +58,7 @@ const NavBar: React.FC<NavBarProps> = ({ isOpen, setIsOpen }) => {
             <img
               src={google_store}
               alt='google_store'
-              className='w-36 h-10 mb-6'
+              className='w-[136px] h-[40px] mb-6'
             />
             <img
               src={app_store}

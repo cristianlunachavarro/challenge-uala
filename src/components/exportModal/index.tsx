@@ -14,24 +14,31 @@ interface ExportModalProps {
 const ExportModal: FC<ExportModalProps> = ({ setOpenExport }) => {
   const [range, setRange] = useState<DateRange | undefined>(undefined);
   const transactions = useTransactionStore((state) => state.transactions);
+  const setAlert = useTransactionStore((state) => state.setAlert);
 
   const getTransactionToDownload = (): Transaction[] => {
     if (!range?.from || !range?.to) return [];
-    return transactions.filter((tx: Transaction) => {
-      const createdAt = new Date(tx.createdAt);
-      return createdAt >= range.from! && createdAt <= range.to!;
+
+    const from = new Date(range.from);
+    const to = new Date(range.to);
+
+    return transactions.filter(({ createdAt }) => {
+      const created = new Date(createdAt);
+      return created >= from && created <= to;
     });
   };
 
   const handleDownload = () => {
-    if (!range?.from || !range?.to) {
-      alert('Selecciona un rango de fechas válido antes de descargar.');
-      return;
-    }
-    downloadFile(getTransactionToDownload());
-    setOpenExport();
-  };
+    const transactionsToDownload = getTransactionToDownload();
 
+    if (transactionsToDownload.length === 0) {
+      return setAlert('No hay movimientos en las fechas seleccionadas para descargar');
+    }
+    downloadFile(transactionsToDownload);
+    setOpenExport();
+    setAlert('Descarga realizada con éxito');
+
+  };
   const handleClear = () => setRange(undefined);
 
   return (

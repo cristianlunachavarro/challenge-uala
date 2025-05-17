@@ -1,25 +1,21 @@
 import { create } from 'zustand';
-import {
-  Filters,
-  Metadata,
-  TimeRange,
-  Transaction,
-} from '../types/transactions';
+import { Filters, Metadata, Transaction } from '../types/transactions';
 import { fetchTransactions } from '../api/transactions';
 
 type TransactionStore = {
   transactions: Transaction[];
   totalAmount: number;
   timeRange: string;
-  setTimeRange: (value: string) => void;
   filters: Filters;
   metadata: Metadata;
   loading: boolean;
-  error: string | null;
+  alert: string | null;
+  setTimeRange: (value: string) => void;
   fetchTransactions: () => Promise<void>;
   setFilters: (filters: Partial<Filters>) => void;
   clearFilters: () => void;
   setTotalAmount: (value: number) => void;
+  setAlert: (alert: string | null) => void;
 };
 
 export const useTransactionStore = create<TransactionStore>((set) => ({
@@ -31,15 +27,15 @@ export const useTransactionStore = create<TransactionStore>((set) => ({
   timeRange: 'week',
   filters: {},
   loading: false,
-  error: null,
+  alert: null,
   totalAmount: 0,
   fetchTransactions: async () => {
     try {
-      set({ loading: true, error: null });
+      set({ loading: true, alert: null });
       const { transactions, metadata } = await fetchTransactions();
       set({ transactions, metadata, loading: false });
     } catch (error: any) {
-      set({ error: error.message || 'Error desconocido', loading: false });
+      set({ alert: error.message || 'Server error', loading: false });
     }
   },
   setTimeRange: (timeRange: string) => set(() => ({ timeRange })),
@@ -47,4 +43,5 @@ export const useTransactionStore = create<TransactionStore>((set) => ({
     set((state) => ({ filters: { ...state.filters, ...filters } })),
   clearFilters: () => set(() => ({ filters: {} })),
   setTotalAmount: (totalAmount: number) => set(() => ({ totalAmount })),
+  setAlert: (alert: string | null) => set(() => ({ alert: alert })),
 }));
