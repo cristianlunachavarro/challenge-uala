@@ -53,3 +53,7 @@ npx jest
 
 Autenticación de usuario con OAuth o JWT.
 Persistencia local (LocalStorage) para cachear datos y mejorar performance.
+
+* Nota: Mientras realizaba el despliegue en Vercel: el bucket S3 no está configurado para permitir solicitudes CORS desde    https://challenge-uala-inky.vercel.app por lo cual no es posible acceder a la data de transacciones en ambiente productivo.
+
+Por lo cual como solución temporaria y para poder presentar en desafío técnico copíe el json que recibia de la consulta y lo consumí de forma local, simulando la llamada original. /public/transactions.json

@@ -6,6 +6,7 @@ interface ApiResponse {
   metadata: Metadata;
 }
 
+// Mock API call to fetch transactions
 export const fetchTransactions = async (): Promise<ApiResponse> => {
   const response = await Promise.resolve(Transactions);
   return response;

@@ -126,9 +126,7 @@ const Transactions: FC<TransactionsProps> = ({
         </div>
       </div>
       <TransactionsList transactions={shownTransactions} />
-      {isOpenExport && (
-        <ExportModal setOpenExport={() => setOpenExport} />
-      )}
+      {isOpenExport && <ExportModal setOpenExport={setOpenExport} />}
       {isOpenModal && <FilterModal setOpenModal={setOpenModal} />}
     </div>
   );

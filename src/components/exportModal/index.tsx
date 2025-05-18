@@ -8,7 +8,7 @@ import { useTransactionStore } from '@/store/useTransactionStore';
 import { Transaction } from '@/types/transactions';
 
 interface ExportModalProps {
-  setOpenExport: () => void;
+  setOpenExport: (isOpenExport: boolean) => void;
 }
 
 const TRANSACTIONS_MSG = {
@@ -20,7 +20,7 @@ const TRANSACTIONS_MSG = {
 const ExportModal: FC<ExportModalProps> = ({ setOpenExport }) => {
   const transactions = useTransactionStore((state) => state.transactions);
   const setAlert = useTransactionStore((state) => state.setAlert);
-  
+
   const [range, setRange] = useState<DateRange | undefined>(undefined);
 
   const getTransactionToDownload = (): Transaction[] => {
@@ -42,8 +42,8 @@ const ExportModal: FC<ExportModalProps> = ({ setOpenExport }) => {
       return setAlert(TRANSACTIONS_MSG.NO_TRANSACTIONS);
     }
     downloadFile(transactionsToDownload);
-    setOpenExport();
     setAlert(TRANSACTIONS_MSG.SUCCESS_MESSAGE);
+    setOpenExport(false);  
   };
 
   const handleClear = () => setRange(undefined);

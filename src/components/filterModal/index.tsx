@@ -147,7 +147,7 @@ const FilterModal: React.FC<FilterProps> = ({ setOpenModal }) => {
   return (
     <div className='fixed inset-0 z-[90] bg-black bg-opacity-30 backdrop-blur-sm'>
       <div
-        className='flex flex-col fixed top-0 right-0 h-full w-full md:w-2/5 bg-white shadow-lg z-50 p-9 overflow-y-auto transition-transform duration-300 ease-in-out justify-between h-full'
+        className='flex flex-col fixed top-0 right-0 h-full w-full md:w-2/5 bg-white shadow-lg z-50 p-9   -y-auto transition-transform duration-300 ease-in-out justify-between h-full'
       >
         <div>
           <div className='flex mb-9 content-center'>
