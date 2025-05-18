@@ -5,9 +5,9 @@ import { useTransactionStore } from '@/store/useTransactionStore';
 const Alert = () => {
   const alert = useTransactionStore((state) => state.alert);
   const setAlert = useTransactionStore((state) => state.setAlert);
- 
+
   const [visible, setVisible] = useState(false);
- 
+
   const errorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,20 +28,22 @@ const Alert = () => {
   }, [alert, setAlert]);
 
   return (
-    <div
-      ref={errorRef}
-      className='h-[48px] flex items-center justify-center mb-5 w-[90%] md:w-[60%] m-auto'
-    >
+    <>
       {alert && (
         <div
-          className={`bg-[#002066] text-base text-white font-thin p-2 text-center w-full rounded-md transition-opacity duration-300 z-[100] ${
-            visible ? 'opacity-100' : 'opacity-0'
-          }`}
+          ref={errorRef}
+          className={`md:w-3/4 w-[90%] 
+                    bg-[#002066] text-white text-base font-normal 
+                    px-4 py-2 mx-auto
+                    md:px-5 md:py-3 rounded-md shadow-lg 
+                    transition-opacity duration-300 ${
+                      true ? 'opacity-100' : 'opacity-0'
+                    }`}
         >
-          <p>{alert}</p>
+          <p className='text-center'>{alert}</p>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -10,9 +10,9 @@ function App() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
-    <div className='flex bg-[#FAFAFA]'>
+    <div className='flex bg-[#FAFAFA] min-h-[980px]'>
       <NavBar isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
-      <div className='flex-1 dm-mw=[920px] mw-[720px]'>
+      <div className='flex-1 min-h-[980px]' >
         <Header setIsNavOpen={setIsNavOpen} />
         <TimeRange />
         <Metrics />
