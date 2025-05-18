@@ -8,9 +8,11 @@ interface ApiResponse {
 }
 
 const API_URL =
-  'https://uala-dev-challenge.s3.us-east-1.amazonaws.com/transactions.json';
+  import.meta.env.MODE === 'development'
+    ? '/api/transactions'
+    : 'https://uala-dev-challenge.s3.us-east-1.amazonaws.com/transactions.json';
 
 export const fetchTransactions = async (): Promise<ApiResponse> => {
-  const response = await axios.get('/api/transactions');
+  const response = await axios.get(API_URL);
   return response.data;
 };
