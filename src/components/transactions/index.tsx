@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import dayjs from 'dayjs';
@@ -15,15 +15,24 @@ import ExportModal from '@/components/exportModal';
 
 dayjs.extend(weekOfYear);
 
-export default function Transactions() {
+interface TransactionsProps {
+  isOpenModal: boolean;
+  isOpenExport: boolean;
+  setOpenModal: (isOpenModal: boolean) => void;
+  setOpenExport: (isOpenExport: boolean) => void;
+}
+
+const Transactions: FC<TransactionsProps> = ({
+  isOpenModal,
+  isOpenExport,
+  setOpenModal,
+  setOpenExport,
+}) => {
   const transactions = useTransactionStore((state) => state.transactions);
   const filters = useTransactionStore((state) => state.filters);
   const timeRange = useTransactionStore((state) => state.timeRange);
   const setTotalAmount = useTransactionStore((state) => state.setTotalAmount);
   const { fetchTransactions } = useTransactionStore();
-
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const [isOpenExport, setOpenExport] = useState<boolean>(false);
 
   const filterTxs = (tx: Transaction, filters: Filters) => {
     if (filters?.cards?.length && !filters.cards.includes(tx.card))
@@ -97,13 +106,19 @@ export default function Transactions() {
         <h2 className='text-sm font-semibold'>Historial de transacciones</h2>
         <div className='flex items-center space-x-4'>
           <img
-            onClick={() => setOpenModal(true)}
+            onClick={() => {
+              setOpenModal(!isOpenModal);
+              setOpenExport(false);
+            }}
             className='w-[24px] h-[24px] cursor-pointer'
             src={filter_icon}
             alt='filter-icon'
           />
           <img
-            onClick={() => setOpenExport(!isOpenExport)}
+            onClick={() => {
+              setOpenExport(!isOpenExport);
+              setOpenModal(false);
+            }}
             className='w-[24px] h-[24px] cursor-pointer'
             src={export_icon}
             alt='export-icon'
@@ -112,9 +127,11 @@ export default function Transactions() {
       </div>
       <TransactionsList transactions={shownTransactions} />
       {isOpenExport && (
-        <ExportModal setOpenExport={() => setOpenExport(false)} />
+        <ExportModal setOpenExport={() => setOpenExport} />
       )}
       {isOpenModal && <FilterModal setOpenModal={setOpenModal} />}
     </div>
   );
-}
+};
+
+export default Transactions;

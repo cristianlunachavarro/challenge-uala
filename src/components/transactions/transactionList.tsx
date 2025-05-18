@@ -34,7 +34,7 @@ const TransactionsList: FC<TransactionsListProps> = ({ transactions }) => {
   }
 
   return (
-    <div className='overflow-y-auto max-h-[450px] pr-2'>
+    <div className='overflow-y-auto h-[450px] pr-2'>
       <ul className='space-y-4'>
         {transactions.map((tx: Transaction) => (
           <li key={tx.id} className='border-b py-3'>

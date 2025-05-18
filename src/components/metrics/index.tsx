@@ -21,14 +21,23 @@ import analize_icon from '@/assets/timeRange/analyze-icon.png';
 import { useTransactionStore } from '@/store/useTransactionStore';
 import { Transaction } from '@/types/transactions';
 
+interface MetricsProps {
+  isOpenMetrics: boolean;
+  setOpenExport: (isOpenExport: boolean) => void;
+  setIsOpenMetrics: (isOpenMetrics: boolean) => void;
+}
+
 dayjs.extend(isoWeek);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 
-const Metrics: FC = () => {
+const Metrics: FC<MetricsProps> = ({
+  isOpenMetrics,
+  setIsOpenMetrics,
+  setOpenExport,
+}) => {
   const transactions = useTransactionStore((state) => state.transactions);
-  
-  const [isOpen, setIsOpen] = useState(false);
+
   const [filter, setFilter] = useState<'week' | 'month'>('week');
 
   const today = dayjs();
@@ -42,6 +51,7 @@ const Metrics: FC = () => {
   });
 
   const groupedData: Record<string, { count: number; total: number }> = {};
+
   filteredTransactions.forEach((tx) => {
     const dateStr = dayjs(tx.createdAt).format('D MMM');
     if (!groupedData[dateStr]) {
@@ -54,14 +64,17 @@ const Metrics: FC = () => {
   const chartData = Object.entries(groupedData).map(([date, data]) => ({
     date,
     count: data.count,
-    total: data.total,
+    total: Math.round(data.total * 100) / 100,
   }));
 
   return (
     <div className='w-full'>
       <div
         className='flex justify-center text-blue-700 cursor-pointer'
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpenMetrics(true);
+          setOpenExport(false);
+        }}
       >
         <img
           src={analize_icon}
@@ -71,11 +84,11 @@ const Metrics: FC = () => {
         <span>Ver métricas</span>
       </div>
 
-      {isOpen && (
+      {isOpenMetrics && (
         <div className='fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center'>
           <div className='bg-white w-full max-w-3xl rounded-lg shadow-lg p-6 relative'>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={() => setIsOpenMetrics(false)}
               className='absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl'
             >
               &times;
@@ -136,7 +149,9 @@ const Metrics: FC = () => {
                                   backgroundColor: entry.color,
                                 }}
                               />
-                              <span className='text-base font-semibold'>{entry.value}</span>
+                              <span className='text-base font-semibold'>
+                                {entry.value}
+                              </span>
                             </div>
                           ))}
                         </div>

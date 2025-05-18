@@ -13,6 +13,11 @@ const API_URL =
     : '/api/transactions';
 
 export const fetchTransactions = async (): Promise<ApiResponse> => {
-  const response = await axios.get(API_URL);
-  return response.data;
+const response = await axios.get(API_URL, {
+  headers: {
+    Origin: 'https://challenge-uala-inky.vercel.app',
+    'Access-Control-Request-Headers': 'Content-Type',
+  },
+})  
+return response.data;
 };
