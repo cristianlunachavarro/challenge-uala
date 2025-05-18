@@ -11,10 +11,17 @@ interface ExportModalProps {
   setOpenExport: () => void;
 }
 
+const TRANSACTIONS_MSG = {
+  SUCCESS_MESSAGE: 'Archivo exportado con éxito',
+  NO_TRANSACTIONS:
+    'No hay movimientos en las fechas seleccionadas para descargar',
+};
+
 const ExportModal: FC<ExportModalProps> = ({ setOpenExport }) => {
-  const [range, setRange] = useState<DateRange | undefined>(undefined);
   const transactions = useTransactionStore((state) => state.transactions);
   const setAlert = useTransactionStore((state) => state.setAlert);
+  
+  const [range, setRange] = useState<DateRange | undefined>(undefined);
 
   const getTransactionToDownload = (): Transaction[] => {
     if (!range?.from || !range?.to) return [];
@@ -32,13 +39,13 @@ const ExportModal: FC<ExportModalProps> = ({ setOpenExport }) => {
     const transactionsToDownload = getTransactionToDownload();
 
     if (transactionsToDownload.length === 0) {
-      return setAlert('No hay movimientos en las fechas seleccionadas para descargar');
+      return setAlert(TRANSACTIONS_MSG.NO_TRANSACTIONS);
     }
     downloadFile(transactionsToDownload);
     setOpenExport();
-    setAlert('Descarga realizada con éxito');
-
+    setAlert(TRANSACTIONS_MSG.SUCCESS_MESSAGE);
   };
+
   const handleClear = () => setRange(undefined);
 
   return (

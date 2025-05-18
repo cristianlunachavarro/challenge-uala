@@ -34,7 +34,7 @@ const Alert = () => {
     >
       {alert && (
         <div
-          className={`bg-[#002066] text-base text-white font-thin p-2 text-center w-full rounded-md transition-opacity duration-300 ${
+          className={`bg-[#002066] text-base text-white font-thin p-2 text-center w-full rounded-md transition-opacity duration-300 z-[100] ${
             visible ? 'opacity-100' : 'opacity-0'
           }`}
         >

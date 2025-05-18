@@ -15,13 +15,13 @@ interface FilterProps {
 }
 
 const FilterModal: React.FC<FilterProps> = ({ setOpenModal }) => {
+
   const cardMeta = useTransactionStore((state) => state.metadata.cards);
-  const clearStoreFilters = useTransactionStore((state) => state.clearFilters);
-
-  const setStoreFilters = useTransactionStore((state) => state.setFilters);
-
   const storeFilters = useTransactionStore((state) => state.filters);
-
+  const clearStoreFilters = useTransactionStore((state) => state.clearFilters);
+  const setStoreFilters = useTransactionStore((state) => state.setFilters);
+  
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
   const [selectedCards, setSelectedCards] = useState<string[]>(
     storeFilters?.cards || []
   );
@@ -39,7 +39,6 @@ const FilterModal: React.FC<FilterProps> = ({ setOpenModal }) => {
     max?: number;
   }>(storeFilters.amountRange || {});
 
-  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   const selectCard = (value: string) => {
     setSelectedCards((prev) => {
@@ -148,8 +147,7 @@ const FilterModal: React.FC<FilterProps> = ({ setOpenModal }) => {
   return (
     <div className='fixed inset-0 z-[90] bg-black bg-opacity-30 backdrop-blur-sm'>
       <div
-        className='flex flex-col fixed top-0 right-0 h-full w-full md:w-2/5 bg-white shadow-lg z-50 p-9 overflow-y-auto 
-    transition-transform duration-300 ease-in-out justify-between h-full'
+        className='flex flex-col fixed top-0 right-0 h-full w-full md:w-2/5 bg-white shadow-lg z-50 p-9 overflow-y-auto transition-transform duration-300 ease-in-out justify-between h-full'
       >
         <div>
           <div className='flex mb-9 content-center'>
@@ -172,7 +170,6 @@ const FilterModal: React.FC<FilterProps> = ({ setOpenModal }) => {
           </div>
           <Dates dateRange={dateRange} setDateRange={setDateRange} />
           <Cards selectedCards={selectedCards} selectCard={selectCard} />
-
           <Installments
             selectedInstallment={selectedInstallment}
             selectInstallment={selectInstallment}

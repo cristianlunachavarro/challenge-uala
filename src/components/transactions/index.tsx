@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import dayjs from 'dayjs';
 
@@ -14,41 +15,42 @@ import ExportModal from '@/components/exportModal';
 
 dayjs.extend(weekOfYear);
 
-const filterTxs = (tx: Transaction, filters: Filters) => {
-  if (filters?.cards?.length && !filters.cards.includes(tx.card)) return false;
-  if (
-    filters?.dateRange?.from &&
-    dayjs(tx.createdAt) < dayjs(filters.dateRange.from)
-  )
-    return false;
-  if (
-    filters?.dateRange?.to &&
-    dayjs(tx.createdAt) > dayjs(filters.dateRange.to)
-  )
-    return false;
-  if (
-    filters?.paymentMethod?.length &&
-    !filters.paymentMethod.includes(tx.paymentMethod)
-  )
-    return false;
-  if (filters?.installments && tx.installments !== filters.installments)
-    return false;
-  if (filters?.amountRange?.min && tx.amount < filters.amountRange.min)
-    return false;
-  if (filters?.amountRange?.max && tx.amount > filters.amountRange.max)
-    return false;
-  return true;
-};
-
 export default function Transactions() {
-  const { fetchTransactions } = useTransactionStore();
   const transactions = useTransactionStore((state) => state.transactions);
   const filters = useTransactionStore((state) => state.filters);
   const timeRange = useTransactionStore((state) => state.timeRange);
   const setTotalAmount = useTransactionStore((state) => state.setTotalAmount);
+  const { fetchTransactions } = useTransactionStore();
 
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const [isOpenExport, setOpenExport] = useState<boolean>(false);
+
+  const filterTxs = (tx: Transaction, filters: Filters) => {
+    if (filters?.cards?.length && !filters.cards.includes(tx.card))
+      return false;
+    if (
+      filters?.dateRange?.from &&
+      dayjs(tx.createdAt) < dayjs(filters.dateRange.from)
+    )
+      return false;
+    if (
+      filters?.dateRange?.to &&
+      dayjs(tx.createdAt) > dayjs(filters.dateRange.to)
+    )
+      return false;
+    if (
+      filters?.paymentMethod?.length &&
+      !filters.paymentMethod.includes(tx.paymentMethod)
+    )
+      return false;
+    if (filters?.installments && tx.installments !== filters.installments)
+      return false;
+    if (filters?.amountRange?.min && tx.amount < filters.amountRange.min)
+      return false;
+    if (filters?.amountRange?.max && tx.amount > filters.amountRange.max)
+      return false;
+    return true;
+  };
 
   const shownTransactions = useMemo(
     () =>
@@ -109,7 +111,9 @@ export default function Transactions() {
         </div>
       </div>
       <TransactionsList transactions={shownTransactions} />
-      {isOpenExport && <ExportModal setOpenExport={() => setOpenExport(false)} />}
+      {isOpenExport && (
+        <ExportModal setOpenExport={() => setOpenExport(false)} />
+      )}
       {isOpenModal && <FilterModal setOpenModal={setOpenModal} />}
     </div>
   );

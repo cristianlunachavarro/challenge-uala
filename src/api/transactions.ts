@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { Transaction, Metadata } from '../types/transactions';
 
 interface ApiResponse {

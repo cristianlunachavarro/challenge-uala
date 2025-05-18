@@ -74,7 +74,7 @@ describe('TransactionList', () => {
     ).toBeInTheDocument();
   });
 
-  test('Shows skeleton when loading', () => {
+  test('Shows transaction skeleton when loading', () => {
     (useTransactionStore as unknown as jest.Mock).mockReturnValue({
       loading: true,
     });

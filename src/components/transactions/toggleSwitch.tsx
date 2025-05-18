@@ -1,19 +1,15 @@
 import { FC } from 'react';
 
-interface TogglePros {
+interface ToggleProps {
   checked: boolean;
   onChange: () => void;
+  dataTestId?: string;
 }
 
-const ToggleSwitch: FC<TogglePros> = ({
-  checked,
-  onChange,
-}: {
-  checked: boolean;
-  onChange: () => void;
-}) => (
+const ToggleSwitch: FC<ToggleProps> = ({ checked, onChange, dataTestId }) => (
   <label className='relative inline-block w-12 h-6 cursor-pointer'>
     <input
+      data-testid={dataTestId}
       type='checkbox'
       className='sr-only peer'
       checked={checked}

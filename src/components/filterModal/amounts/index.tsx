@@ -9,16 +9,16 @@ interface AmountsProps {
   setAmountRange: (value: { min?: number; max?: number }) => void;
 }
 
-const Amounts: FC<AmountsProps> = ({ amountRange, setAmountRange }) => {
-  const DEFAULT_MIN = 0;
-  const DEFAULT_MAX = 2000;
-  const DEFAULT_ACTIVE_MAX = 1000;
+const DEFAULT_MIN = 0;
+const DEFAULT_MAX = 2000;
+const DEFAULT_ACTIVE_MAX = 1000;
 
+const Amounts: FC<AmountsProps> = ({ amountRange, setAmountRange }) => {
+  const [open, setOpen] = useState(!!(amountRange.min || amountRange.max));
   const [minValue, setMinValue] = useState(amountRange.min ?? DEFAULT_MIN);
   const [maxValue, setMaxValue] = useState(
     amountRange.max ?? DEFAULT_ACTIVE_MAX
   );
-  const [open, setOpen] = useState(!!(amountRange.min || amountRange.max));
 
   const parseCurrency = (value: string) => {
     return Number(value.replace(/[^\d]/g, '')) || 0;
@@ -62,7 +62,6 @@ const Amounts: FC<AmountsProps> = ({ amountRange, setAmountRange }) => {
       setMaxValue(max);
     }
   }, [amountRange, open]);
-
 
   return (
     <div className='mb-9'>

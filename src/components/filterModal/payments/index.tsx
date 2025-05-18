@@ -3,7 +3,6 @@ import { FC, useState } from 'react';
 import categoires_icon from '@/assets/filter/categories-icon.png';
 
 import { useTransactionStore } from '@/store/useTransactionStore';
-
 import { PaymentMethod } from '@/types/transactions';
 
 import ToggleSwitch from '@/components/transactions/toggleSwitch';
@@ -32,6 +31,7 @@ const Payments: FC<PaymentsProps> = ({ selectedPayments, selectPayment }) => {
           <p className='ml-5'>Método de cobro</p>
         </div>
         <ToggleSwitch
+          dataTestId={'payment-toggle-switch'}
           checked={open}
           onChange={() => setOpen((prev) => !prev)}
         />

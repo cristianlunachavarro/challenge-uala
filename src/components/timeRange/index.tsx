@@ -1,9 +1,8 @@
 import { FC, useMemo } from 'react';
 
-import analize_icon from '@/assets/timeRange/analyze-icon.png';
-
 import { useTransactionStore } from '@/store/useTransactionStore';
-import TimeRangeSkeleton from './timeRangeSkeleton';
+
+import TimeRangeSkeleton from '@/components/timeRange/timeRangeSkeleton';
 
 const dateOptions = [
   { value: 'day', label: 'Diario' },
@@ -68,14 +67,6 @@ const TimeRange: FC = () => {
           </span>
         </div>
       )}
-      <div className='flex w-full justify-center text-blue-700'>
-        <img
-          src={analize_icon}
-          alt='analize-icon'
-          className='w-[24px] h-[24px] mr-2'
-        />
-        <span>Ver métricas</span>
-      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 
 import Payments from '../components/filterModal/payments';
 
@@ -17,18 +17,18 @@ jest.mock('../store/useTransactionStore', () => ({
 }));
 
 describe('Payments component', () => {
-  test('renderiza todos los métodos de pago que vienen del store', () => {
-    render(
-      <Payments
-        selectedPayments={['link']}
-        selectPayment={() => {}}
-      />
-    );
+  test('Renders payemtn methods from the store', async () => {
+    render(<Payments selectedPayments={['link']} selectPayment={() => {}} />);
+    const toggleSwitch = screen.getByTestId('payment-toggle-switch');
+    act(() => {
+      toggleSwitch.click();
+    });
 
-    const expectedLabels = ['Link de pago', 'Código QR', 'mPOS', 'POS Pro'];
-
-    expectedLabels.forEach((label) => {
-      expect(screen.getByText(label)).toBeInTheDocument();
+    waitFor(() => {
+      const expectedLabels = ['Link de pago', 'Código QR', 'mPOS', 'POS Pro'];
+      expectedLabels.forEach((label) => {
+        expect(screen.getByText(label)).toBeInTheDocument();
+      });
     });
   });
 });
