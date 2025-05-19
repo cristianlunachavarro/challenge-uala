@@ -70,7 +70,7 @@ const Metrics: FC<MetricsProps> = ({
   return (
     <div className='w-full'>
       <div
-        className='flex justify-center text-blue-800 hover:text-blue-600 cursor-pointer'
+        className='flex justify-center text-blue-900 hover:text-blue-600 cursor-pointer'
         onClick={() => {
           setIsOpenMetrics(true);
           setOpenExport(false);

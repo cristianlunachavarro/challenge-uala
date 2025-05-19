@@ -108,7 +108,12 @@ const Transactions: FC<TransactionsProps> = ({
         <h2 className='text-sm font-semibold'>Historial de transacciones</h2>
         <div className='flex items-center space-x-4'>
           {Object.keys(filters).length > 0 && (
-            <p className='text-sm text-blue-800 hover:text-blue-600 font-semibold cursor-pointer' onClick={() => clearFilters()}>Limpiar filtros</p>
+            <p
+              className='text-center text-xs md:text-sm text-blue-900 hover:text-blue-600 font-semibold cursor-pointer'
+              onClick={() => clearFilters()}
+            >
+              Limpiar filtros
+            </p>
           )}
           <img
             onClick={() => {
