@@ -50,22 +50,13 @@ const Dates: FC<DatesProps> = ({ dateRange, setDateRange }) => {
           onChange={() => setOpen((prev) => !prev)}
         />
       </div>
-
       {open && (
-        <div className='mt-5 p-4 rounded-xl shadow bg-white w-fit m-auto'>
+        <div className='p-3 rounded-xl shadow bg-white w-fit relative mt-5 left-0 m-auto left-[-15px]'>
           <DayPicker
             mode='range'
             selected={range}
             onSelect={handleSelect}
             navLayout='around'
-            classNames={{
-              day_selected: 'bg-blue-800 text-white',
-              day_range_middle: 'bg-blue-100',
-              day_range_start: 'bg-blue-800 text-white rounded-l-full',
-              day_range_end: 'bg-blue-800 text-white rounded-r-full',
-              caption_label: 'text-lg font-semibold',
-              nav_button: 'text-blue-800 hover:bg-blue-100 rounded-full p-1',
-            }}
           />
           <button
             onClick={handleClear}

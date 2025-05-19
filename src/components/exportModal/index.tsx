@@ -49,7 +49,7 @@ const ExportModal: FC<ExportModalProps> = ({ setOpenExport }) => {
   const handleClear = () => setRange(undefined);
 
   return (
-    <div className='absolute top-[75px] right-[35px] md:top-20 md:right-[75px] z-50 bg-white shadow-lg rounded-xl p-6 w-[355px]'>
+    <div className='exportmodal-popup absolute top-[75px] md:top-20 z-50 bg-white shadow-lg rounded-xl p-6 w-[355px]'>
       <div className='flex justify-between mx-2 mb-4 items-center'>
         <img
           className='w-[24px] h-[24px]'

@@ -4,7 +4,7 @@
 
 @layer utilities {
   .nav-shadow-right {
-  box-shadow: 10px 0 10px -5px rgba(13, 66, 182, 0.18);
+    box-shadow: 10px 0 10px -5px rgba(13, 66, 182, 0.18);
   }
 }
 
@@ -26,3 +26,47 @@ body {
 .no-spinner {
   -moz-appearance: textfield;
 }
+
+/* Fix for datepicker popup position on export modal*/
+@media (max-width: 362px) {
+  .exportmodal-popup {
+    right: 3.5px! important;
+  }
+}
+
+@media (min-width: 363px) and (max-width: 376px) {
+  .exportmodal-popup {
+    right: 10px;
+  }
+}
+
+@media (min-width: 377px) and (max-width: 391px) {
+  .exportmodal-popup {
+    transform: translateX(-20px);
+  }
+}
+
+@media (min-width: 392px) and (max-width: 430px) {
+  .exportmodal-popup {
+    right: 27.5px;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 510px) {
+  .exportmodal-popup {
+    transform: translateX(45px);
+  }
+}
+
+@media (min-width: 511px) and (max-width: 1280px) {
+  .exportmodal-popup {
+    transform: translateX(40px);
+  }
+}
+
+@media (min-width: 1281px){
+  .exportmodal-popup {
+    transform: translateX(50px);
+  }
+}
+
