@@ -32,7 +32,7 @@ const Transactions: FC<TransactionsProps> = ({
   const filters = useTransactionStore((state) => state.filters);
   const timeRange = useTransactionStore((state) => state.timeRange);
   const setTotalAmount = useTransactionStore((state) => state.setTotalAmount);
-  const { fetchTransactions } = useTransactionStore();
+  const { fetchTransactions, clearFilters } = useTransactionStore();
 
   const filterTxs = (tx: Transaction, filters: Filters) => {
     if (filters?.cards?.length && !filters.cards.includes(tx.card))
@@ -100,11 +100,16 @@ const Transactions: FC<TransactionsProps> = ({
     fetchTransactions();
   }, []);
 
+  console.log('filters', filters);
+
   return (
     <div className='flex flex-col max-w-lg m-auto p p-9 relative'>
       <div className='flex justify-between mb-5'>
         <h2 className='text-sm font-semibold'>Historial de transacciones</h2>
         <div className='flex items-center space-x-4'>
+          {Object.keys(filters).length > 0 && (
+            <p className='text-sm text-blue-800 hover:text-blue-600 font-semibold cursor-pointer' onClick={() => clearFilters()}>Limpiar filtros</p>
+          )}
           <img
             onClick={() => {
               setOpenModal(!isOpenModal);
