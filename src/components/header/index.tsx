@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from '@/assets/navbar/uala-logo.png';
+import logo from '@/assets/navbar/wallex-logo.jpg';
 import menu from '@/assets/header/menu-icon.png';
 import photo from '@/assets/header/user-photo.png';
 
@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ setIsNavOpen }) => {
           className='absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 z-10 cursor-pointer'
           onClick={() => setIsNavOpen((prev) => !prev)}
         />
-        <img src={logo} alt='uala logo' className='h-6 z-10' />
+        <img src={logo} alt='wallex-logo' className='h-6 z-10' />
       </div>
 
       <div className='hidden md:flex items-center bg-white px-8 py-4'>

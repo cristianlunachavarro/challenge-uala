@@ -1,4 +1,4 @@
-import Transactions from '../../public/transactions.json';
+import Transactions from '@/public/transactions.json';
 import type { Transaction, Metadata } from '../types/transactions';
 
 interface ApiResponse {

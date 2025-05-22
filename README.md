@@ -1,59 +1,85 @@
+A responsive dashboard to visualize and filter transactions using React, TypeScript, and TailwindCSS.
 
-- Clona el repositorio:
-git clone https://github.com/cristianlunachavarro/challenge-uala.git
+## 🚀 Getting Started
+
+### Clone the repository
+```bash
+git clone https://github.com/cristianlunachavarro/wallex-app.git
 cd transactions-dashboard
+```
 
-- Instala dependencias:
+### Install dependencies
+```bash
 npm install
+```
 
-- Ejecuta el proyecto:
+### Run the development server
+```bash
 npm run dev
+```
 
-- Arquitectura utilizada
+---
+
+## 📁 Project Structure
+
+```
 src/
 │
-├── api/               # Lógica de llamadas a APIs
-├── assets/            # Imagenes
-├── components/        # Componentes reutilizables de UI
-├── hooks/             # Hooks personalizados
-├── pages/             # Páginas principales de la app
-├── store/             # Estados globales de la app
-└── types/             # Definiciones TypeScript
-└── utils/             # Funciones ts
+├── api/         # API call logic
+├── assets/      # Images
+├── components/  # Reusable UI components
+├── hooks/       # Custom React hooks
+├── pages/       # Main app pages
+├── store/       # Global state with Redux or Context
+├── types/       # TypeScript interfaces and types
+└── utils/       # Utility functions
+```
 
+---
 
-React con TypeScript como base de desarrollo.
+## 🛠️ Technologies Used
 
-TailwindCSS para estilos rápidos y responsivos.
+- **React + TypeScript** – Modern frontend stack
+- **TailwindCSS** – Utility-first CSS framework
+- **Dayjs** – Lightweight date library
+- **Jest** – Testing framework
+- **Manual CSV Export** – No external CSV library
+- **Skeleton Loaders** – Animated placeholders for better UX
 
-Dayjs para el formateo de fechas.
+---
 
-Exportación a CSV implementada manualmente sin dependencias externas.
+## ✨ Features
 
-Skeletons animados para mejorar la experiencia mientras se carga la data.
+- 🔍 **Filter Transactions**  
+  Filter by date, card, installments, amount, and payment method (multi-select supported).
 
-- Funcionalidades
-* Permite visualizar transacciones consumiendo una API externa
-* Permite filtras las transacciones por fechas, tarjetas, cuotas, monto y metodo de cobro, ademas seleccionando dos o mas opciones. 
-* Permite filtrar por semana, mes y día.
-* Permite exportar las transacciones a un archivo con formato CSV
-* Permite general un grafico de las transacciones filtradas por mes y semana (desde el dia inicial, hasta la fecha actual), el grafico muestra el numero de transacciones y el monto total por día.
+- 📅 **Time Range Filters**  
+  View transactions by day, week, or month.
 
-- Testing con Jest
-- Correr test
+- 📊 **Analytics Chart**  
+  Visualizes number of transactions and total amounts per day for selected range (week/month).
+
+- 📁 **CSV Export**  
+  Export filtered transactions to a `.csv` file.
+
+- ⚡ **Skeleton Loading States**  
+  While fetching data, animated placeholders are displayed.
+
+---
+
+## ✅ Testing with Jest
+
+### Run tests
+```bash
 npx jest
+```
 
-* Valida que los datos de las transacciones mostrados sean los correctos
-* Validamos que renderice multiples trasacciones
-* Valida que en el caso que no haya transacciones, muestres la vista de "No hay resultados que mostrar.."
-* Valida que el skeleton de transacciones se muestre cuando la consulta se esta haciendo (loading)
-* Valida que se muestres lo metodos de pago guardados en el Store
+### Test Coverage
 
-- Posibles mejoras a futuro
+- ✅ Validates correct transaction data is displayed.
+- ✅ Ensures multiple transactions render properly.
+- ✅ Displays "No results to show..." when no data is available.
+- ✅ Shows loading skeletons while data is being fetched.
+- ✅ Renders saved payment methods from the Store.
 
-Autenticación de usuario con OAuth o JWT.
-Persistencia local (LocalStorage) para cachear datos y mejorar performance.
-
-* Nota: Mientras realizaba el despliegue en Vercel: el bucket S3 no está configurado para permitir solicitudes CORS desde    https://challenge-uala-inky.vercel.app por lo cual no es posible acceder a la data de transacciones en ambiente productivo.
-
-Por lo cual como solución temporaria y para poder presentar en desafío técnico copíe el json que recibia de la consulta y lo consumí de forma local, simulando la llamada original. /public/transactions.json
+---

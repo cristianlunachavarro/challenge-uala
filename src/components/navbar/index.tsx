@@ -1,6 +1,6 @@
 import React from 'react';
 
-import uala_logo from '@/assets/navbar/uala-logo.png';
+import wallex_logo from '@/assets/navbar/wallex-logo.jpg';
 import home_logo from '@/assets/navbar/home-logo.png';
 import fill_logo from '@/assets/navbar/fill-logo.png';
 import google_store from '@/assets/navbar/google-play.png';
@@ -21,7 +21,7 @@ const NavBar: React.FC<NavBarProps> = ({ isOpen, setIsOpen }) => {
     >
       <div>
         <div className='flex justify-between items-center cursor-pointer md:mt-4 mt-6 mb-9 ml-5'>
-          <img className='w-[120px] h-[40px]' src={uala_logo} alt='uala_logo' />
+          <img className='w-[160px] h-[54px]' src={wallex_logo} alt='wallex-logo' />
           <img
             className='w-[8px] h-[14.5px] mr-5 md:hidden'
             onClick={() => setIsOpen(false)}
